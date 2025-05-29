@@ -58,10 +58,10 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("Payment through unknown card")
-    void shouldPayBynUnkCard() {
+    @DisplayName("Payment through card with 15 symbols")
+    void shouldPayBynNotFullCard() {
         formPage.buyForYourMoney();
-        formPage.setCardNumber("4444444444444444");
+        formPage.setCardNumber("444444444444444");
         formPage.setCardMonth("06");
         formPage.setCardYear("26");
         formPage.setCardOwner("Ivan Ivanov");
@@ -102,7 +102,7 @@ public class PaymentTest {
     void showPayBadMonth() {
         formPage.buyForYourMoney();
         formPage.setCardNumber("4444444444444441");
-        formPage.setCardMonth("17");
+        formPage.setCardMonth("13");
         formPage.setCardYear("26");
         formPage.setCardOwner("Ivan Ivanov");
         formPage.setCardCVV("478");
@@ -131,7 +131,7 @@ public class PaymentTest {
         formPage.buyForYourMoney();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("06");
-        formPage.setCardYear("22");
+        formPage.setCardYear("24");
         formPage.setCardOwner("Ivan Ivanov");
         formPage.setCardCVV("478");
         formPage.pushContinueButton();
@@ -152,29 +152,28 @@ public class PaymentTest {
     }
 
     @Test
-    @DisplayName("Payment through card with invalid owner")
-    void showPayBadOwner() {
+    @DisplayName("Payment through card with cyrillic symbols in 'Owner' string")
+    void shouldPayCyrillicCardOwner() {
         formPage.buyForYourMoney();
         formPage.setCardNumber("4444444444444441");
         formPage.setCardMonth("06");
         formPage.setCardYear("26");
-        formPage.setCardOwner("Ivan 852 Iвanoв");
+        formPage.setCardOwner("Иван Иванов");
         formPage.setCardCVV("478");
         formPage.pushContinueButton();
         formPage.checkMessageError();
     }
-
     @Test
-    @DisplayName("Payment through card with invalid CVV")
-    void showPayBadCVV() {
+    @DisplayName("Payment through card with invalid owner")
+    void shouldPayInvalidCardOwner() {
         formPage.buyForYourMoney();
         formPage.setCardNumber("4444444444444441");
-        formPage.setCardMonth("06");
-        formPage.setCardYear("26");
-        formPage.setCardOwner("Ivan Ivanov");
-        formPage.setCardCVV("4DD");
+        formPage.setCardMonth("08");
+        formPage.setCardYear("25");
+        formPage.setCardOwner("Ivan 23$8 Ivanov");
+        formPage.setCardCVV("345");
         formPage.pushContinueButton();
-        formPage.checkMessageWrongFormat();
+        formPage.checkMessageError();
     }
 
     @Test
@@ -185,8 +184,22 @@ public class PaymentTest {
         formPage.setCardMonth("06");
         formPage.setCardYear("26");
         formPage.setCardOwner("Ivan Ivanov");
-        formPage.setCardCVV("4444");
-        formPage.checkCVVInputValue("444");
+        formPage.setCardCVV("2486");
+        formPage.checkCVVInputValue("248");
+        formPage.pushContinueButton();
+        formPage.checkMessageSuccess();
+    }
+    @Test
+    @DisplayName("Input of value '1000'in 'CVV' string, border check")
+    void shouldNotAllow41000InCVV() {
+        formPage.buyForYourMoney();
+
+        formPage.setCardNumber("4444444444444441");
+        formPage.setCardMonth("06");
+        formPage.setCardYear("26");
+        formPage.setCardOwner("Ivan Ivanov");
+        formPage.setCardCVV("1000");
+        formPage.checkCVVInputValue("100");
         formPage.pushContinueButton();
         formPage.checkMessageSuccess();
     }
@@ -203,6 +216,7 @@ public class PaymentTest {
         formPage.pushContinueButton();
         formPage.checkMessageWrongFormat();
     }
+
 
     @Test
     @DisplayName("Payment through empty 'Month' string")

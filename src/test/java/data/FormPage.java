@@ -86,11 +86,10 @@ public class FormPage {
 
 
     public void checkCVVInputValue(String expectedValue) {
-        $(By.cssSelector(".input__control")).shouldHave(Condition.value(expectedValue));
+        $(By.xpath("//input[@placeholder='999']")).shouldHave(Condition.value(expectedValue));
     }
 
     public void checkCardNumberInputValue(String expectedValue) {
         $(By.cssSelector(".input__control")).shouldHave(Condition.value(expectedValue));
     }
-
 }
