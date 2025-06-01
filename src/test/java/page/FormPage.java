@@ -15,8 +15,10 @@ import static com.codeborne.selenide.Selenide.*;
 
 public class FormPage {
 
-    private static String appURL = System.getProperty("app.url");
-    private static String appPORT = System.getProperty("app.port");
+    public FormPage(String baseUrl) {
+        Selenide.open(baseUrl);
+    }
+
     List<SelenideElement> input = Selenide.$$(".input__control");
     SelenideElement cardNumber = input.get(0);
     SelenideElement month = input.get(1);
@@ -25,13 +27,11 @@ public class FormPage {
     SelenideElement cvcOrCvvNumber = input.get(4);
 
     public void buyForYourMoney() {
-        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Оплата по карте")).shouldBe(visible);
     }
 
     public void buyOnCredit() {
-        open(appURL + ":" + appPORT);
         $$(".button__content").find(exactText("Купить в кредит")).click();
         $$(".heading_theme_alfa-on-white").find(exactText("Кредит по данным карты")).shouldBe(visible);
     }

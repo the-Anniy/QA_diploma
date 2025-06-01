@@ -16,7 +16,9 @@ public class PaymentTest {
 
     @BeforeEach
     void setUpPage() {
-        formPage = new FormPage();
+        String appUrl = "http://localhost";
+        int appPort = 8080;
+        formPage = new FormPage(appUrl + ":" + appPort);
     }
 
     @BeforeAll
