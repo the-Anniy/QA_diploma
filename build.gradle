@@ -30,7 +30,7 @@ dependencies {
     testCompileOnly 'org.projectlombok:lombok:1.18.24'
     testAnnotationProcessor 'org.projectlombok:lombok:1.18.20'
     testImplementation 'mysql:mysql-connector-java:8.0.30'
-    testImplementation 'com.github.javafaker:javafaker:1.0.2'
+    testImplementation 'org.postgresql:postgresql:42.6.0'
     testImplementation 'commons-dbutils:commons-dbutils:1.7'
     testImplementation 'io.rest-assured:rest-assured:4.1.2'
 }

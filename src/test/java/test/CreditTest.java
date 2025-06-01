@@ -71,7 +71,7 @@ public class CreditTest {
         formPage.setCardOwner("Ivan Ivanov");
         formPage.setCardCVV("478");
         formPage.pushContinueButton();
-        formPage.checkMessageError();
+        formPage.checkMessageWrongFormat();
     }
 
     @Test
