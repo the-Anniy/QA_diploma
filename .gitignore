@@ -1,11 +1,12 @@
 Thumbs.db*
 .DS_Store
 HELP.md
-.gradle
+.gradle/
 build/
 data/
 .data
 /.data
+/node_modules/
 
 
 

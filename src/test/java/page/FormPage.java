@@ -1,4 +1,4 @@
-package data;
+package page;
 
 import com.codeborne.selenide.Condition;
 import com.codeborne.selenide.Selectors;
@@ -44,20 +44,8 @@ public class FormPage {
         $$(".notification__title").find(exactText("Ошибка")).shouldBe(visible, Duration.ofSeconds(10));
     }
 
-    public void checkMessageWrongFormat() {
-        $$(".input__sub").find(exactText("Неверный формат")).shouldBe(visible);
-    }
-
-    public void checkMessageWrongDate() {
-        $$(".input__sub").find(exactText("Неверно указан срок действия карты")).shouldBe(visible);
-    }
-
-    public void checkMessageOverDate() {
-        $$(".input__sub").find(exactText("Истёк срок действия карты")).shouldBe(visible);
-    }
-
-    public void checkMessageRequiredField() {
-        $$(".input__sub").find(exactText("Поле обязательно для заполнения")).shouldBe(visible);
+    public void checkInputSubMessage(String expectedMessage) {
+        $$(".input__sub").find(exactText(expectedMessage)).shouldBe(visible);
     }
 
     public void setCardNumber(String cNumber) {
