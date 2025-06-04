@@ -96,7 +96,9 @@ public class DataHelper {
     }
 
     public static String generateInvalidCardNumberWithLongLength() {
-        return APPROVED_CARD_NUMBER + "7";
+        Random random = new Random();
+        int randomDigit = random.nextInt(10);
+        return APPROVED_CARD_NUMBER + randomDigit;
     }
 
     public static String generateInvalidCardNumberWithLettersOrSymbols() {
@@ -106,5 +108,15 @@ public class DataHelper {
                 "ABCD123456789012"
         };
         return invalidFormats[new Random().nextInt(invalidFormats.length)];
+    }
+
+    public static String generateFourDigitsCVV() {
+        Random random = new Random();
+        int number = 1000 + random.nextInt(9000);
+        return String.valueOf(number);
+    }
+
+    public static String generateBoundaryFourDigitCVV() {
+        return "1000";
     }
 }

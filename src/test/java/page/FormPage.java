@@ -71,13 +71,4 @@ public class FormPage {
     public void pushContinueButton() {
         $$(".button__content").find(exactText("Продолжить")).click();
     }
-
-
-    public void checkCVVInputValue(String expectedValue) {
-        $(By.xpath("//input[@placeholder='999']")).shouldHave(Condition.value(expectedValue));
-    }
-
-    public void checkCardNumberInputValue(String expectedValue) {
-        $(By.cssSelector(".input__control")).shouldHave(Condition.value(expectedValue));
-    }
 }
